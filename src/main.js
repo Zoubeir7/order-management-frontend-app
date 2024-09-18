@@ -1,8 +1,6 @@
 import "bootstrap/dist/css/bootstrap.css"
 import "bootstrap/dist/js/bootstrap.js"
-import "./assets/css/style.css"
 
-import router from '@router'
 import { createApp } from 'vue'
 import App from './App.vue'
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -15,6 +13,16 @@ import { far } from '@fortawesome/free-regular-svg-icons';
 library.add(far);
 import { dom } from "@fortawesome/fontawesome-svg-core";
 dom.watch();
+
+import { routes } from './router/router';
+import { createRouter, createWebHistory } from 'vue-router';
+
+
+const router = createRouter({
+    history: createWebHistory(),
+    routes
+})
+
 
 
 const app = createApp(App)
