@@ -2,11 +2,9 @@
   <div class="container mt-5">
     <h2>Liste des clients</h2>
 
-    <button type="button" class="btn btn-primary" @click="ouvrirModal()">
+    <button type="button" class=" btn btn-primary" @click="ouvrirModal()">
       Ajouter un client
     </button>
-
-    <!-- Table des clients -->
     <table class="table table-striped table-bordered mt-3">
       <thead>
         <tr>

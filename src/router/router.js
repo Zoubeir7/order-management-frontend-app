@@ -1,6 +1,8 @@
 import ShowCusmoter from "../components/customer/ShowCusmoter.vue";
 import AddCustomer from "../components/customer/AddCustomer.vue";
 import EditCusmoter from "../components/customer/EditCusmoter.vue";
+import ShowProduct from "../components/product/ShowProduct.vue";
+import AddProduct from "../components/product/AddProduct.vue";
 
 
 export const routes = [
@@ -9,13 +11,14 @@ export const routes = [
         component: ShowCusmoter
     },
     {
-        path: '/Addcustomer',
-        component: AddCustomer
+        path: '/products',
+        component: ShowProduct
     },
-    {
-        path: '/Editcustomer/:index',
-        component: EditCusmoter
-    },
+    // {
+    //     path: '/o',
+    //     component: AddProduct
+    // },
+ 
 ];
 
 
