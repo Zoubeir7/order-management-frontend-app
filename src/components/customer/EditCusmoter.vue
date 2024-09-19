@@ -4,7 +4,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editClientModalLabel">Edit Client</h5>
+                    <h5 class="modal-title" id="editClientModalLabel">Edit Customer</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -63,5 +63,4 @@ const modifierClient = () => {
 </script>
 
 <style scoped>
-/* Ajoutez ici vos styles spécifiques */
 </style>

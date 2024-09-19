@@ -5,7 +5,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div :class="['collapse', 'navbar-collapse', { show: isNavbarVisible }]" id="navbarNav">
-                <ul class="navbar-nav me-auto mr-2 mb-lg-0 container">
+                <ul class="navbar-nav me-auto ml-3 mb-lg-0 container">
                     <li class="nav-item">
                         <RouterLink class="nav-link" to="/">
                             <i class="fas fa-users"></i> Customers
@@ -46,7 +46,21 @@ body {
     background-color: #f8f9fa;
 }
 
+.navbar-nav li i {
+    margin-left: 10px;
+}
+
 .nav-link i {
-    margin-right: 20px;
+    margin: 10px;
+}
+
+
+#navbarNav .nav-item .nav-link {
+    margin: 5px;
+}
+
+
+#navbarNav {
+    margin-left: 30px;
 }
 </style>

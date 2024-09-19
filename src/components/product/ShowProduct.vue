@@ -1,20 +1,20 @@
 <template>
   <div class="container mt-5">
-    <h2>Liste des produits</h2>
+    <h2>List of Products</h2>
 
-    <button type="button" class="btn btn-primary" @click="ouvrirModal()">
-      Ajouter un produit
+    <button type="button" class="btn btn-primary float-end mb-3" @click="ouvrirModal()">
+      Add new Product
     </button>
     <table class="table table-striped table-bordered mt-3">
       <thead>
         <tr>
           <th>Nom du produit</th>
           <th>Description</th>
-          <th>Prix</th>
+          <th>Price</th>
           <th>Stock</th>
-          <th>Catégorie</th>
-          <th>Code-barres</th>
-          <th>Statut</th>
+          <th>category</th>
+          <th>Barecode</th>
+          <th>Status</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -56,14 +56,14 @@
           <div class="modal-body">
             <p><strong>Nom:</strong> {{ produitSelectionne?.product_name }}</p>
             <p><strong>Description:</strong> {{ produitSelectionne?.description }}</p>
-            <p><strong>Prix:</strong> {{ produitSelectionne?.price }}</p>
+            <p><strong>Price:</strong> {{ produitSelectionne?.price }}</p>
             <p><strong>Stock:</strong> {{ produitSelectionne?.stock }}</p>
-            <p><strong>Catégorie:</strong> {{ produitSelectionne?.category }}</p>
-            <p><strong>Code-barres:</strong> {{ produitSelectionne?.barcode }}</p>
-            <p><strong>Statut:</strong> {{ produitSelectionne?.status }}</p>
+            <p><strong>category:</strong> {{ produitSelectionne?.category }}</p>
+            <p><strong>Barecode:</strong> {{ produitSelectionne?.barcode }}</p>
+            <p><strong>status:</strong> {{ produitSelectionne?.status }}</p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
       </div>

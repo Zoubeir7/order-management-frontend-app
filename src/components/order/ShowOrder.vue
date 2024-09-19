@@ -1,18 +1,18 @@
 <template>
     <div class="container mt-5">
-        <h2>Liste des commandes</h2>
+        <h2>List of Orders</h2>
 
-        <button class="btn btn-primary" @click="redirigerVersAddOrder">
-            Ajouter une commande
+        <button class="btn btn-primary float-end mb-3" @click="redirigerVersAddOrder">
+            Add New Order
         </button>
 
         <table class="table table-striped table-bordered mt-3">
             <thead>
                 <tr>
                     <th>Date</th>
-                    <th>Client</th>
-                    <th>Adresse de livraison</th>
-                    <th>Numéro de suivi</th>
+                    <th>Customer</th>
+                    <th>Delivery Address</th>
+                    <th>Track Number</th>
                     <th>Status</th>
                     <th>Actions</th>
                 </tr>
@@ -44,18 +44,18 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="orderDetailsModalLabel">Détails de la commande</h5>
+                        <h5 class="modal-title" id="orderDetailsModalLabel">View order</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <p><strong>Date:</strong> {{ commandeSelectionnee?.date }}</p>
-                        <p><strong>Client:</strong> {{ commandeSelectionnee?.customer_name }}</p>
-                        <p><strong>Adresse de livraison:</strong> {{ commandeSelectionnee?.delivery_address }}</p>
-                        <p><strong>Numéro de suivi:</strong> {{ commandeSelectionnee?.track_number }}</p>
+                        <p><strong>Customer:</strong> {{ commandeSelectionnee?.customer_name }}</p>
+                        <p><strong> Delivery Address:</strong> {{ commandeSelectionnee?.delivery_address }}</p>
+                        <p><strong> Track Number:</strong> {{ commandeSelectionnee?.track_number }}</p>
                         <p><strong>Status:</strong> {{ commandeSelectionnee?.status }}</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
@@ -65,8 +65,8 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useRouter } from 'vue-router'; 
-const router = useRouter(); 
+import { useRouter } from 'vue-router';
+const router = useRouter();
 
 const orders = ref([
     { id: 1, date: '25/07/2024', customer_name: 'John Doe', delivery_address: '123 Main St, New York, NY', track_number: 'TN001', status: 'Shipped' },
@@ -77,7 +77,7 @@ const orders = ref([
 const commandeSelectionnee = ref(null);
 
 const redirigerVersAddOrder = () => {
-    router.push('/AddOrder/create'); 
+    router.push('/AddOrder/create');
 };
 
 const showOrder = (order) => {
@@ -95,7 +95,6 @@ const mettreAJourCommande = (orderModifie) => {
     }
 };
 
-// Fonction pour supprimer une commande
 const supprimerCommande = (id) => {
     orders.value = orders.value.filter(order => order.id !== id);
 };

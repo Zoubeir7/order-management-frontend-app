@@ -21,7 +21,6 @@ export const routes = [
         path: '/AddOrder/create',
         component: AddOrder
     },
-
 ];
 
 

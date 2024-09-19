@@ -1,8 +1,7 @@
 <template>
   <div class="container mt-5">
     <h2>List of Customers</h2>
-
-    <button type="button" class=" btn btn-primary" @click="ouvrirModal()">
+    <button type="button" class=" btn btn-primary float-end mb-3" @click="ouvrirModal()">
       Add New Cusmoter
     </button>
     <table class="table table-striped table-bordered mt-3">
@@ -40,17 +39,17 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="detailsModalLabel">Détails du client</h5>
+            <h5 class="modal-title" id="detailsModalLabel">View Cusmoter</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <p><strong>Nom:</strong> {{ clientSelectionne?.customer_name }}</p>
-            <p><strong>Adresse:</strong> {{ clientSelectionne?.adress }}</p>
+            <p><strong>Cusmoter:</strong> {{ clientSelectionne?.customer_name }}</p>
+            <p><strong>Adress:</strong> {{ clientSelectionne?.adress }}</p>
             <p><strong>Email:</strong> {{ clientSelectionne?.email }}</p>
-            <p><strong>Téléphone:</strong> {{ clientSelectionne?.phone }}</p>
+            <p><strong>Phone:</strong> {{ clientSelectionne?.phone }}</p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
