@@ -27,11 +27,11 @@
                             <label for="phone" class="form-label">Phone</label>
                             <input v-model="clientLocal.phone" type="text" id="phone" class="form-control" required />
                         </div>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
                     </form>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer d-flex justify-content-end gap-2">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Confirm</button>
                 </div>
             </div>
         </div>
