@@ -48,7 +48,7 @@
             <p><strong>Email:</strong> {{ clientSelectionne?.email }}</p>
             <p><strong>Phone:</strong> {{ clientSelectionne?.phone }}</p>
           </div>
-          <div class="modal-footer">
+          <div class="modal-footer d-flex justify-content-end gap-2">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
