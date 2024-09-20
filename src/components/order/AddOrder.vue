@@ -129,7 +129,7 @@ const submitOrder = () => {
 };
 
 const goHome = () => {
-    router.push('/');
+    router.push('/orders');
 };
 </script>
 
