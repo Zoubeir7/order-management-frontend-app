@@ -5,15 +5,16 @@
     <button type="button" class="btn btn-primary float-end mb-3" @click="ouvrirModal()">
       Add new Product
     </button>
+
     <table class="table table-striped table-bordered mt-3">
       <thead>
         <tr>
-          <th>Nom du produit</th>
+          <th>Product Name</th>
           <th>Description</th>
           <th>Price</th>
           <th>Stock</th>
-          <th>category</th>
-          <th>Barecode</th>
+          <th>Category</th>
+          <th>Barcode</th>
           <th>Status</th>
           <th>Actions</th>
         </tr>
@@ -28,15 +29,14 @@
           <td>{{ product.barcode }}</td>
           <td>{{ product.status }}</td>
           <td>
-            <!-- Bouton pour voir les détails du produit -->
             <button class="btn btn-info btn-sm me-2" @click="voirDetails(product)">
               <i class="fas fa-eye"></i>
             </button>
-            <!-- Bouton pour éditer le produit -->
+
             <button class="btn btn-warning btn-sm me-2" @click="ouvrirModal(product)">
               <i class="fas fa-edit"></i>
             </button>
-            <!-- Bouton pour supprimer le produit -->
+
             <button class="btn btn-danger btn-sm" @click="supprimerProduit(product.id)">
               <i class="fas fa-trash"></i>
             </button>
@@ -45,22 +45,21 @@
       </tbody>
     </table>
 
-    <!-- Modale pour afficher les détails du produit -->
     <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="detailsModalLabel">Détails du produit</h5>
+            <h5 class="modal-title" id="detailsModalLabel">View Product</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <p><strong>Nom:</strong> {{ produitSelectionne?.product_name }}</p>
+            <p><strong>Product Name:</strong> {{ produitSelectionne?.product_name }}</p>
             <p><strong>Description:</strong> {{ produitSelectionne?.description }}</p>
             <p><strong>Price:</strong> {{ produitSelectionne?.price }}</p>
             <p><strong>Stock:</strong> {{ produitSelectionne?.stock }}</p>
-            <p><strong>category:</strong> {{ produitSelectionne?.category }}</p>
-            <p><strong>Barecode:</strong> {{ produitSelectionne?.barcode }}</p>
-            <p><strong>status:</strong> {{ produitSelectionne?.status }}</p>
+            <p><strong>Category:</strong> {{ produitSelectionne?.category }}</p>
+            <p><strong>Barcode:</strong> {{ produitSelectionne?.barcode }}</p>
+            <p><strong>Status:</strong> {{ produitSelectionne?.status }}</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -69,14 +68,17 @@
       </div>
     </div>
 
-    <!-- Inclure la modale pour ajouter/éditer un produit -->
+
+    <AddProductModal @product-added="ajouterProduit" />
     <EditProductModal :product="produitSelectionne" @product-modifie="mettreAJourProduit" />
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
+import AddProductModal from './AddProduct.vue';
 import EditProductModal from './EditProduct.vue';
+import { Modal } from 'bootstrap';
 
 const products = ref([
   { id: 1, product_name: 'Product 001', description: 'High-quality product.', price: 100, stock: 50, category: 'Electronics', barcode: '123456789012', status: 'Active' },
@@ -86,33 +88,38 @@ const products = ref([
 
 const produitSelectionne = ref(null);
 
-// Fonction pour ouvrir la modale d'édition ou d'ajout
 const ouvrirModal = (product = null) => {
-  produitSelectionne.value = product ? { ...product } : { id: Date.now(), product_name: '', description: '', price: '', stock: '', category: '', barcode: '', status: '' }; // Nouveau produit si null
-  const modalElement = new bootstrap.Modal(document.getElementById('editProductModal'));
-  modalElement.show();
+  produitSelectionne.value = product
+    ? { ...product }
+    : { id: Date.now(), product_name: '', description: '', price: '', stock: '', category: '', barcode: '', status: '' };
+
+  const modalId = product ? 'editProductModal' : 'addProductModal';
+  const modalElement = document.getElementById(modalId);
+  const modal = new Modal(modalElement);
+  modal.show();
 };
 
-// Fonction pour voir les détails du produit
+const ajouterProduit = (nouveauProduit) => {
+  products.value.push({ ...nouveauProduit, id: Date.now() });
+};
+
 const voirDetails = (product) => {
-  produitSelectionne.value = product; // Sélectionner le produit à afficher
-  const modalElement = new bootstrap.Modal(document.getElementById('detailsModal')); // Ouvrir la modale de détails
-  modalElement.show();
+  produitSelectionne.value = product;
+  const modalElement = document.getElementById('detailsModal');
+  const modal = new Modal(modalElement);
+  modal.show();
 };
 
-// Fonction pour mettre à jour le produit existant ou en ajouter un nouveau
+
 const mettreAJourProduit = (productModifie) => {
   const index = products.value.findIndex(product => product.id === productModifie.id);
   if (index !== -1) {
-    products.value[index] = productModifie; // Mise à jour du produit existant
-  } else {
-    products.value.push(productModifie); // Ajout d'un nouveau produit
+    products.value[index] = productModifie;
   }
 };
 
-// Fonction pour supprimer un produit
 const supprimerProduit = (id) => {
-  products.value = products.value.filter(product => product.id !== id); // Suppression du produit
+  products.value = products.value.filter(product => product.id !== id);
 };
 </script>
 

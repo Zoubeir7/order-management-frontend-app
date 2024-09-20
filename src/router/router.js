@@ -14,11 +14,11 @@ export const routes = [
         component: ShowProduct
     },
     {
-        path: '/orders',
+        path: '/Orders',
         component: ShowOrder
     },
     {
-        path: '/AddOrder/create',
+        path: '/orders/create',
         component: AddOrder
     },
 ];

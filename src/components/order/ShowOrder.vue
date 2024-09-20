@@ -69,15 +69,15 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 
 const orders = ref([
-    { id: 1, date: '25/07/2024', customer_name: 'John Doe', delivery_address: '123 Main St, New York, NY', track_number: 'TN001', status: 'Shipped' },
-    { id: 2, date: '26/07/2024', customer_name: 'Jane Smith', delivery_address: '456 Oak St, Los Angeles, CA', track_number: 'TN002', status: 'Delivered' },
-    { id: 3, date: '27/07/2024', customer_name: 'Alice Martin', delivery_address: '789 Pine St, Chicago, IL', track_number: 'TN003', status: 'Processing' },
+    { id: 1, date: '25/07/2024', customer_name: 'Alice Johnson', delivery_address: '789 Elm St, San Francisco, CA', track_number: 'TN001', status: 'Shipped' },
+    { id: 2, date: '26/07/2024', customer_name: 'Bob Brown', delivery_address: '101 Pine St, Seattle, WA', track_number: 'TN002', status: 'Delivered' },
+    { id: 3, date: '27/07/2024', customer_name: 'Carlos Garcia', delivery_address: '202 Maple Ave, Austin, TX', track_number: 'TN003', status: 'Processing' },
 ]);
 
 const commandeSelectionnee = ref(null);
 
 const redirigerVersAddOrder = () => {
-    router.push('/AddOrder/create');
+    router.push('/Orders/create');
 };
 
 const showOrder = (order) => {

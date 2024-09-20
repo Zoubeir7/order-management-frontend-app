@@ -1,7 +1,7 @@
 <template>
     <div class="modal fade" id="editClientModal" tabindex="-1" aria-labelledby="editClientModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="editClientModalLabel">Edit Customer</h5>
@@ -39,7 +39,7 @@
 </template>
 
 <script setup>
-import { ref, watch, toRefs } from 'vue';
+import { ref, watch } from 'vue';
 
 const props = defineProps({
     client: Object
@@ -62,5 +62,4 @@ const modifierClient = () => {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

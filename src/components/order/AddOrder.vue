@@ -1,6 +1,7 @@
 <template>
     <div class="container mt-5">
-        <div class="mes-btn"> <button type="button" class="btn btn-secondary" @click="goHome">Return to order</button>
+        <div class="mes-btn">
+            <button type="button" class="btn btn-secondary me-3" @click="goHome">Return to order list</button>
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
         <h3 class="mb-4">Create a New Order</h3>
@@ -33,8 +34,8 @@
                 </div>
             </div>
 
-            <div class="row mb-3">
-                <div class="col-md-6">
+            <div class="row mb-3 d-flex justify-content-end">
+                <div class="col-md-6 ">
                     <label for="order_status" class="form-label">Order Status</label>
                     <select id="order_status" v-model="order.status" class="form-select">
                         <option value="Processing">Processing</option>
@@ -147,5 +148,4 @@ const goHome = () => {
     justify-content: flex-end;
 
 }
-
 </style>

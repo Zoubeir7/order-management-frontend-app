@@ -59,6 +59,10 @@ body {
     margin: 5px;
 }
 
+.nav-link:hover {
+    cursor: pointer;
+    color: rgb(78, 78, 245);
+}
 
 #navbarNav {
     margin-left: 30px;

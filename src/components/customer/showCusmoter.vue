@@ -1,30 +1,30 @@
 <template>
   <div class="container mt-5">
     <h2>List of Customers</h2>
-    <button type="button" class=" btn btn-primary float-end mb-3" @click="ouvrirModal()">
-      Add New Cusmoter
+    <button type="button" class=" btn btn-primary float-end mb-3" @click="ouvrirModalAjout">
+      Add New Customer
     </button>
     <table class="table table-striped table-bordered mt-3">
       <thead>
         <tr>
           <th>Name</th>
-          <th>Adress</th>
+          <th>Address</th>
           <th>Email</th>
-          <th>phone</th>
+          <th>Phone</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="client in clients" :key="client.email">
           <td>{{ client.customer_name }}</td>
-          <td>{{ client.adress }}</td>
+          <td>{{ client.address }}</td>
           <td>{{ client.email }}</td>
           <td>{{ client.phone }}</td>
           <td>
             <button class="btn btn-info btn-sm me-2" @click="voirDetails(client)">
               <i class="fas fa-eye"></i>
             </button>
-            <button class="btn btn-warning btn-sm me-2" @click="ouvrirModal(client)">
+            <button class="btn btn-warning btn-sm me-2" @click="ouvrirModalEdition(client)">
               <i class="fas fa-edit"></i>
             </button>
             <button class="btn btn-danger btn-sm" @click="supprimerClient(client.id)">
@@ -36,15 +36,15 @@
     </table>
 
     <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="detailsModalLabel">View Cusmoter</h5>
+            <h5 class="modal-title" id="detailsModalLabel">View Customer</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <p><strong>Cusmoter:</strong> {{ clientSelectionne?.customer_name }}</p>
-            <p><strong>Adress:</strong> {{ clientSelectionne?.adress }}</p>
+            <p><strong>Customer:</strong> {{ clientSelectionne?.customer_name }}</p>
+            <p><strong>Address:</strong> {{ clientSelectionne?.address }}</p>
             <p><strong>Email:</strong> {{ clientSelectionne?.email }}</p>
             <p><strong>Phone:</strong> {{ clientSelectionne?.phone }}</p>
           </div>
@@ -55,24 +55,47 @@
       </div>
     </div>
 
-    <EditModal :client="clientSelectionne" @client-modifie="mettreAJourClient" />
+    <AddCustomer @client-ajoute="ajouterClient" />
+    <EditCustomer :client="clientSelectionne" @client-modifie="mettreAJourClient" />
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import EditModal from './EditCusmoter.vue';
+import AddCustomer from './AddCustomer.vue';
+import EditCustomer from './EditCusmoter.vue';
+
 const clients = ref([
-  { id: 1, customer_name: 'John Doe', adress: '123 Main St, New York, NY', email: 'johndoe@example.com', phone: '123-456-7890' },
-  { id: 2, customer_name: 'Jane Smith', adress: '456 Oak St, Los Angeles, CA', email: 'janesmith@example.com', phone: '098-765-4321' },
-]);
+  { id: 1, customer_name: 'Alice Johnson', address: '789 Elm St, San Francisco, CA', email: 'alice.johnson@example.com', phone: '555-123-4567' },
+  { id: 2, customer_name: 'Bob Brown', address: '101 Pine St, Seattle, WA', email: 'bob.brown@example.com', phone: '555-987-6543' },
+  { id: 3, customer_name: 'Carlos Garcia', address: '202 Maple Ave, Austin, TX', email: 'carlos.garcia@example.com', phone: '512-555-6789' },
+  { id: 4, customer_name: 'Diana Martinez', address: '303 Birch Rd, Denver, CO', email: 'diana.martinez@example.com', phone: '303-555-1234' },
+  { id: 5, customer_name: 'Ethan Wilson', address: '404 Cedar St, Boston, MA', email: 'ethan.wilson@example.com', phone: '617-555-5678' }
+]
+);
 
 const clientSelectionne = ref(null);
 
-const ouvrirModal = (client = null) => {
-  clientSelectionne.value = client ? { ...client } : { id: Date.now(), customer_name: '', adress: '', email: '', phone: '' };
+const ouvrirModalAjout = () => {
+  const modalElement = new bootstrap.Modal(document.getElementById('addClientModal'));
+  modalElement.show();
+};
+
+const ouvrirModalEdition = (client) => {
+  clientSelectionne.value = { ...client };
   const modalElement = new bootstrap.Modal(document.getElementById('editClientModal'));
   modalElement.show();
+};
+
+const ajouterClient = (client) => {
+  clients.value.push({ ...client, id: Date.now() });
+};
+
+const mettreAJourClient = (client) => {
+  const index = clients.value.findIndex(c => c.id === client.id);
+  if (index !== -1) {
+    clients.value[index] = client;
+  }
 };
 
 const voirDetails = (client) => {
@@ -81,26 +104,9 @@ const voirDetails = (client) => {
   modalElement.show();
 };
 
-const mettreAJourClient = (clientModifie) => {
-  const index = clients.value.findIndex(client => client.id === clientModifie.id);
-  if (index !== -1) {
-    clients.value[index] = clientModifie;
-  } else {
-    clients.value.push(clientModifie);
-  }
-};
-
 const supprimerClient = (id) => {
   clients.value = clients.value.filter(client => client.id !== id);
 };
 </script>
 
-<style scoped>
-.table td {
-  vertical-align: middle;
-}
-
-.table th {
-  font-weight: bold;
-}
-</style>
+<style scoped></style>
