@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "clean": "rm -rf dist && rm -rf node_modules"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
