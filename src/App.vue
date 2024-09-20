@@ -17,7 +17,7 @@
                         </RouterLink>
                     </li>
                     <li class="nav-item">
-                        <RouterLink :class="['nav-link', { active: route.path === '/Orders' }]" to="/Orders">
+                        <RouterLink :class="['nav-link', { active: route.path.startsWith('/Orders') }]" to="/Orders">
                             <i class="fas fa-shopping-cart"></i> Orders
                         </RouterLink>
                     </li>
@@ -35,6 +35,7 @@ import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 
 const isNavbarVisible = ref(false);
+
 const route = useRoute();
 
 function toggleNavbar() {
@@ -59,10 +60,8 @@ body {
     margin: 5px;
 }
 
-
 .nav-link.active {
     color: rgb(78, 78, 245) !important;
-
 }
 
 #navbarNav {
