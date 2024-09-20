@@ -105,8 +105,12 @@ const voirDetails = (client) => {
 };
 
 const supprimerClient = (id) => {
-  clients.value = clients.value.filter(client => client.id !== id);
+  const confirmation = window.confirm('Are you sure you want to delete this customer?');
+  if (confirmation) {
+    clients.value = clients.value.filter(client => client.id !== id);
+  }
 };
+
 </script>
 
 <style scoped></style>

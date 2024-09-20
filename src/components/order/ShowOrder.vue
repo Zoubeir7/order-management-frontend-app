@@ -39,6 +39,7 @@
             </tbody>
         </table>
 
+        <!-- Modal d'affichage de l'ordre -->
         <div class="modal fade" id="orderDetailsModal" tabindex="-1" aria-labelledby="orderDetailsModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -60,12 +61,17 @@
                 </div>
             </div>
         </div>
+
+        <!-- Modal d'édition de l'ordre -->
+        <EditOrder :order="commandeSelectionnee" @order-modified="mettreAJourCommande" />
     </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import EditOrder from './EditOrder.vue';
+
 const router = useRouter();
 
 const orders = ref([
@@ -86,26 +92,23 @@ const showOrder = (order) => {
     modalElement.show();
 };
 
+const ouvrirModal = (order) => {
+    commandeSelectionnee.value = order;
+    const modalElement = new bootstrap.Modal(document.getElementById('editOrderModal'));
+    modalElement.show();
+};
+
 const mettreAJourCommande = (orderModifie) => {
     const index = orders.value.findIndex(order => order.id === orderModifie.id);
     if (index !== -1) {
         orders.value[index] = orderModifie;
-    } else {
-        orders.value.push(orderModifie);
     }
 };
 
 const supprimerCommande = (id) => {
-    orders.value = orders.value.filter(order => order.id !== id);
+    const confirmation = window.confirm('Are you sure you want to delete this order?');
+    if (confirmation) {
+        orders.value = orders.value.filter(order => order.id !== id);
+    }
 };
 </script>
-
-<style scoped>
-.table td {
-    vertical-align: middle;
-}
-
-.table th {
-    font-weight: bold;
-}
-</style>

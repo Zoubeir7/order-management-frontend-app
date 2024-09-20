@@ -1,11 +1,5 @@
 <template>
     <div class="container mt-5">
-        <div class="mes-btn">
-            <button type="button" class="btn btn-secondary me-3" @click="goHome">Return to order list</button>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-        <h3 class="mb-4">Create a New Order</h3>
-
         <form @submit.prevent="submitOrder">
             <div class="d-flex justify-content-between mt-4">
 
@@ -44,7 +38,10 @@
                     </select>
                 </div>
             </div>
-
+            <div class="mes-btn">
+                <button type="button" class="btn btn-secondary me-3" @click="goHome">Return to order list</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
             <h4 class="mt-4">Order Details</h4>
             <table class="table table-bordered">
                 <thead>
@@ -119,7 +116,9 @@ const addDetail = () => {
 };
 
 const removeDetail = (index) => {
-    order.value.details.splice(index, 1);
+    if (index !== 0) {
+        order.value.details.splice(index, 1);
+    }
 };
 
 const submitOrder = () => {

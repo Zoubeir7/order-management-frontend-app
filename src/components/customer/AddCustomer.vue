@@ -15,7 +15,7 @@
             </div>
             <div class="mb-3">
               <label for="address" class="form-label">Address</label>
-              <input v-model="nouveauClient.address" type="text" id="address" class="form-control" required />
+              <textarea v-model="nouveauClient.address" id="address" class="form-control" rows="2" required></textarea>
             </div>
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>

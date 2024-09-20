@@ -117,10 +117,14 @@ const mettreAJourProduit = (productModifie) => {
     products.value[index] = productModifie;
   }
 };
-
 const supprimerProduit = (id) => {
-  products.value = products.value.filter(product => product.id !== id);
+  const confirmation = confirm("Are you sure you want to delete this product?");
+  if (confirmation) {
+    products.value = products.value.filter(product => product.id !== id);
+  }
 };
+
+
 </script>
 
 <style scoped>
