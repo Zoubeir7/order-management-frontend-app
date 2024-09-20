@@ -12,12 +12,14 @@
                         </RouterLink>
                     </li>
                     <li class="nav-item">
-                        <RouterLink :class="['nav-link', { active: route.path === '/Products' }]" to="/Products">
+                        <RouterLink :class="['nav-link', { active: route.path.toLowerCase().startsWith('/products') }]"
+                            to="/products">
                             <i class="fas fa-box-open"></i> Products
                         </RouterLink>
                     </li>
                     <li class="nav-item">
-                        <RouterLink :class="['nav-link', { active: route.path.startsWith('/Orders') }]" to="/Orders">
+                        <RouterLink :class="['nav-link', { active: route.path.toLowerCase().startsWith('/orders') }]"
+                            to="/orders">
                             <i class="fas fa-shopping-cart"></i> Orders
                         </RouterLink>
                     </li>
@@ -35,7 +37,6 @@ import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 
 const isNavbarVisible = ref(false);
-
 const route = useRoute();
 
 function toggleNavbar() {

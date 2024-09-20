@@ -1,8 +1,12 @@
 <template>
     <div class="container mt-5">
         <form @submit.prevent="submitOrder">
-            <div class="d-flex justify-content-between mt-4">
 
+            <h2>Create New Order</h2>
+            <div class="mes-btn">
+                <button type="button" class="btn btn-secondary me-3 float-end mb-2" @click="goHome">Return to order
+                    list</button>
+                <button type="button" class="btn btn-primary float-end mb-2">Submit</button>
             </div>
             <div class="row mb-3">
                 <div class="col-md-6">
@@ -38,10 +42,7 @@
                     </select>
                 </div>
             </div>
-            <div class="mes-btn">
-                <button type="button" class="btn btn-secondary me-3" @click="goHome">Return to order list</button>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
+
             <h4 class="mt-4">Order Details</h4>
             <table class="table table-bordered">
                 <thead>
@@ -116,8 +117,13 @@ const addDetail = () => {
 };
 
 const removeDetail = (index) => {
-    if (index !== 0) {
-        order.value.details.splice(index, 1);
+    const confirmation = window.confirm('Are you sure you want to remove this detail?');
+    if (confirmation) {
+        if (index !== 0) {
+            order.value.details.splice(index, 1);
+        } else {
+            alert('You cannot remove the first detail.');
+        }
     }
 };
 

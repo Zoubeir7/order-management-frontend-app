@@ -2,9 +2,7 @@
     <div class="container mt-5">
         <h2>List of Orders</h2>
 
-        <button class="btn btn-primary float-end mb-3" @click="redirigerVersAddOrder">
-            Add New Order
-        </button>
+        <button class="btn btn-primary float-end mb-3" @click="redirigerVersAddOrder">Add New Order</button>
 
         <table class="table table-striped table-bordered mt-3">
             <thead>
@@ -28,7 +26,7 @@
                         <button class="btn btn-info btn-sm me-2" @click="showOrder(order)">
                             <i class="fas fa-eye"></i>
                         </button>
-                        <button class="btn btn-warning btn-sm me-2" @click="ouvrirModal(order)">
+                        <button class="btn btn-warning btn-sm me-2" @click="redirigerVersEditOrder(order.id)">
                             <i class="fas fa-edit"></i>
                         </button>
                         <button class="btn btn-danger btn-sm" @click="supprimerCommande(order.id)">
@@ -45,15 +43,22 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="orderDetailsModalLabel">View order</h5>
+                        <h5 class="modal-title" id="orderDetailsModalLabel">View Order</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <p><strong>Date:</strong> {{ commandeSelectionnee?.date }}</p>
                         <p><strong>Customer:</strong> {{ commandeSelectionnee?.customer_name }}</p>
-                        <p><strong> Delivery Address:</strong> {{ commandeSelectionnee?.delivery_address }}</p>
-                        <p><strong> Track Number:</strong> {{ commandeSelectionnee?.track_number }}</p>
+                        <p><strong>Delivery Address:</strong> {{ commandeSelectionnee?.delivery_address }}</p>
+                        <p><strong>Track Number:</strong> {{ commandeSelectionnee?.track_number }}</p>
                         <p><strong>Status:</strong> {{ commandeSelectionnee?.status }}</p>
+
+                        <h5 class="mt-3">Order Details</h5>
+                        <ul>
+                            <li v-for="detail in commandeSelectionnee?.details" :key="detail.product">
+                                {{ detail.quantity }} x {{ detail.product }} at {{ detail.price }} USD
+                            </li>
+                        </ul>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -61,54 +66,46 @@
                 </div>
             </div>
         </div>
-
-        <!-- Modal d'édition de l'ordre -->
-        <EditOrder :order="commandeSelectionnee" @order-modified="mettreAJourCommande" />
     </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import EditOrder from './EditOrder.vue';
 
 const router = useRouter();
 
 const orders = ref([
-    { id: 1, date: '25/07/2024', customer_name: 'Alice Johnson', delivery_address: '789 Elm St, San Francisco, CA', track_number: 'TN001', status: 'Shipped' },
-    { id: 2, date: '26/07/2024', customer_name: 'Bob Brown', delivery_address: '101 Pine St, Seattle, WA', track_number: 'TN002', status: 'Delivered' },
-    { id: 3, date: '27/07/2024', customer_name: 'Carlos Garcia', delivery_address: '202 Maple Ave, Austin, TX', track_number: 'TN003', status: 'Processing' },
+    { id: 1, date: '25/07/2024', customer_name: 'Alice Johnson', delivery_address: '789 Elm St, San Francisco, CA', track_number: 'TN001', status: 'Shipped', details: [{ product: 'Product 001', quantity: 2, price: 100 }] },
+    { id: 2, date: '26/07/2024', customer_name: 'Bob Williams', delivery_address: '123 Pine St, Los Angeles, CA', track_number: 'TN002', status: 'Delivered', details: [{ product: 'Product 002', quantity: 1, price: 50 }] }
 ]);
 
 const commandeSelectionnee = ref(null);
 
-const redirigerVersAddOrder = () => {
-    router.push('/Orders/create');
-};
-
 const showOrder = (order) => {
     commandeSelectionnee.value = order;
-    const modalElement = new bootstrap.Modal(document.getElementById('orderDetailsModal'));
-    modalElement.show();
+    const modal = new bootstrap.Modal(document.getElementById('orderDetailsModal'));
+    modal.show();
 };
 
-const ouvrirModal = (order) => {
-    commandeSelectionnee.value = order;
-    const modalElement = new bootstrap.Modal(document.getElementById('editOrderModal'));
-    modalElement.show();
+const redirigerVersEditOrder = (orderId) => {
+    router.push(`/orders/edit/${orderId}`);
 };
 
-const mettreAJourCommande = (orderModifie) => {
-    const index = orders.value.findIndex(order => order.id === orderModifie.id);
-    if (index !== -1) {
-        orders.value[index] = orderModifie;
-    }
+const redirigerVersAddOrder = () => {
+    router.push('/orders/create');
 };
-
-const supprimerCommande = (id) => {
+const supprimerCommande = (orderId) => {
     const confirmation = window.confirm('Are you sure you want to delete this order?');
     if (confirmation) {
-        orders.value = orders.value.filter(order => order.id !== id);
+        orders.value = orders.value.filter(order => order.id !== orderId);
     }
 };
+
 </script>
+
+<style scoped>
+.table {
+    margin-top: 20px;
+}
+</style>
