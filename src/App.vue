@@ -7,17 +7,17 @@
             <div :class="['collapse', 'navbar-collapse', { show: isNavbarVisible }]" id="navbarNav">
                 <ul class="navbar-nav me-auto ml-3 mb-lg-0 container">
                     <li class="nav-item">
-                        <RouterLink class="nav-link" to="/">
+                        <RouterLink :class="['nav-link', { active: route.path === '/' }]" to="/">
                             <i class="fas fa-users"></i> Customers
                         </RouterLink>
                     </li>
                     <li class="nav-item">
-                        <RouterLink class="nav-link" to="/Products">
+                        <RouterLink :class="['nav-link', { active: route.path === '/Products' }]" to="/Products">
                             <i class="fas fa-box-open"></i> Products
                         </RouterLink>
                     </li>
                     <li class="nav-item">
-                        <RouterLink class="nav-link" to="/Orders">
+                        <RouterLink :class="['nav-link', { active: route.path === '/Orders' }]" to="/Orders">
                             <i class="fas fa-shopping-cart"></i> Orders
                         </RouterLink>
                     </li>
@@ -32,9 +32,10 @@
 
 <script setup>
 import { ref } from 'vue';
-import { RouterLink, RouterView } from 'vue-router';
+import { useRoute } from 'vue-router';
 
 const isNavbarVisible = ref(false);
+const route = useRoute();
 
 function toggleNavbar() {
     isNavbarVisible.value = !isNavbarVisible.value;
@@ -54,14 +55,14 @@ body {
     margin: 10px;
 }
 
-
 #navbarNav .nav-item .nav-link {
     margin: 5px;
 }
 
-.nav-link:hover {
-    cursor: pointer;
-    color: rgb(78, 78, 245);
+
+.nav-link.active {
+    color: rgb(78, 78, 245) !important;
+
 }
 
 #navbarNav {
