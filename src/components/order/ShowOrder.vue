@@ -38,7 +38,7 @@
         </table>
 
         <!-- Modal d'affichage de l'ordre -->
-        <div class="modal fade" id="orderDetailsModal" tabindex="-1" aria-labelledby="orderDetailsModalLabel"
+        <!-- <!-- <div class="modal fade" id="orderDetailsModal" tabindex="-1" aria-labelledby="orderDetailsModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -65,7 +65,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -80,13 +80,18 @@ const orders = ref([
     { id: 2, date: '26/07/2024', customer_name: 'Bob Williams', delivery_address: '123 Pine St, Los Angeles, CA', track_number: 'TN002', status: 'Delivered', details: [{ product: 'Product 002', quantity: 1, price: 50 }] }
 ]);
 
-const commandeSelectionnee = ref(null);
+// const commandeSelectionnee = ref(null);
+
+// const showOrder = (order) => {
+//     commandeSelectionnee.value = order;
+//     const modal = new bootstrap.Modal(document.getElementById('orderDetailsModal'));
+//     modal.show();
+// };
 
 const showOrder = (order) => {
-    commandeSelectionnee.value = order;
-    const modal = new bootstrap.Modal(document.getElementById('orderDetailsModal'));
-    modal.show();
+    router.push(`/orders/${order.id}`);
 };
+
 
 const redirigerVersEditOrder = (orderId) => {
     router.push(`/orders/edit/${orderId}`);
