@@ -1,10 +1,9 @@
 import ShowCusmoter from '../components/customer/showCusmoter.vue';
 import AddOrder from '../components/order/AddOrder.vue';
 import EditOrder from '../components/order/EditOrder.vue';
-import OrderDetail from '../components/order/OrderDetail.vue';
 import ShowOrder from '../components/order/ShowOrder.vue';
 import ShowProduct from '../components/product/ShowProduct.vue';
-
+import OrderDetail from '../components/order/OrderDetail.vue'; 
 
 export const routes = [
     {
@@ -16,7 +15,7 @@ export const routes = [
         component: ShowProduct
     },
     {
-        path: '/Orders',
+        path: '/orders', 
         component: ShowOrder
     },
     {
@@ -31,7 +30,4 @@ export const routes = [
         path: '/orders/:id',
         component: OrderDetail
     }
-
 ];
-
-

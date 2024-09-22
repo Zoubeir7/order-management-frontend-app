@@ -2,50 +2,52 @@
     <div class="container mt-5">
         <h2>Order Details</h2>
 
-        <div class="row mb-3">
-            <div class="col-md-6">
-                <label for="date" class="form-label">Date</label>
-                <input type="text" id="date" class="form-control" v-model="order.date" disabled />
+        <div v-if="order" class="order-details">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="date" class="form-label">Date</label>
+                    <input type="text" id="date" class="form-control" v-model="order.date" disabled />
+                </div>
+                <div class="col-md-6">
+                    <label for="deliveryAddress" class="form-label">Delivery Address</label>
+                    <input type="text" id="deliveryAddress" class="form-control" v-model="order.delivery_address"
+                        disabled />
+                </div>
             </div>
-            <div class="col-md-6">
-                <label for="deliveryAddress" class="form-label">Delivery Address</label>
-                <input type="text" id="deliveryAddress" class="form-control" v-model="order.delivery_address"
-                    disabled />
-            </div>
-        </div>
 
-        <div class="row mb-3">
-            <div class="col-md-6">
-                <label for="customerName" class="form-label">Customer Name</label>
-                <input type="text" id="customerName" class="form-control" v-model="order.customer_name" disabled />
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="customerName" class="form-label">Customer Name</label>
+                    <input type="text" id="customerName" class="form-control" v-model="order.customer_name" disabled />
+                </div>
+                <div class="col-md-6">
+                    <label for="trackNumber" class="form-label">Track Number</label>
+                    <input type="text" id="trackNumber" class="form-control" v-model="order.track_number" disabled />
+                </div>
             </div>
-            <div class="col-md-6">
-                <label for="trackNumber" class="form-label">Track Number</label>
-                <input type="text" id="trackNumber" class="form-control" v-model="order.track_number" disabled />
-            </div>
-        </div>
 
-        <div class="row mb-3 d-flex justify-content-end">
-            <div class="col-md-6">
-                <label for="orderStatus" class="form-label">Order Status</label>
-                <input type="text" id="orderStatus" class="form-control" v-model="order.status" disabled />
+            <div class="row mb-3 d-flex justify-content-end">
+                <div class="col-md-6">
+                    <label for="orderStatus" class="form-label">Order Status</label>
+                    <input type="text" id="orderStatus" class="form-control" v-model="order.status" disabled />
+                </div>
             </div>
-        </div>
 
-        <h5 class="mt-3">Order Details</h5>
+            <h5 class="mt-3">Order Details</h5>
 
-        <div v-for="(detail, index) in order.details" :key="index" class="row mb-2">
-            <div class="col-md-4">
-                <label class="form-label">Product</label>
-                <input type="text" class="form-control" v-model="detail.product" disabled />
-            </div>
-            <div class="col-md-4">
-                <label class="form-label">Quantity</label>
-                <input type="number" class="form-control" v-model="detail.quantity" disabled />
-            </div>
-            <div class="col-md-4">
-                <label class="form-label">Price</label>
-                <input type="text" class="form-control" v-model="detail.price" disabled />
+            <div v-for="(detail, index) in order.details" :key="index" class="row mb-2">
+                <div class="col-md-4">
+                    <label class="form-label">Product</label>
+                    <input type="text" class="form-control" v-model="detail.product" disabled />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Quantity</label>
+                    <input type="number" class="form-control" v-model="detail.quantity" disabled />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Price</label>
+                    <input type="text" class="form-control" v-model="detail.price" disabled />
+                </div>
             </div>
         </div>
 
